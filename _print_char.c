@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * _print_char - Prints character
  * @char_c: Character to be printed
@@ -15,4 +14,3 @@ int _print_char (va_list char_c)
 	_putchar(char_n);
 	return (1);
 }
-
