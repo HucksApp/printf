@@ -19,6 +19,7 @@ int (* _find_fmtf(const char *fmspr))(va_list)
 	{"s", _print_string},
 	{"d", _print_int},
 	{"u", _print_unsig},
+	{"R", _print_rot13},
 	{"o", _print_oct},
 	{"r", _print_rev},
 	{"x", _print_hexx},

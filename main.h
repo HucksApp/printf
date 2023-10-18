@@ -20,7 +20,7 @@ int _print_hexX(va_list h);
 int _print_rev(va_list rv);
 int _printf(const char *str, ...);
 int _print_unsig(va_list u);
-
+int _print_rot13(va_list R);
 
 
 /**
