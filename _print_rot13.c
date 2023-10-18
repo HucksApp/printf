@@ -1,27 +1,27 @@
 #include "main.h"
 
 /**
-  * print_rot13 - encodes a string into rot13.
+  * _print_rot13 - convert string to rot13.
   * @R: string to convert
-  * Return: size the output text
+  * Return: printer counter
   */
 int _print_rot13(va_list R)
 {
+	char *n;
 	int j, i, count = 0;
-	char *r;
-	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
-	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLM nopqrstuvwxyzabcdefghijklm";
+	char inp[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
+	char outp[] = "NOPQRSTUVWXYZABCDEFGHIJKLM nopqrstuvwxyzabcdefghijklm";
 
-	r = va_arg(R, char *);
-	if (r == NULL)
-		r = "(null)";
-	for (j = 0; r[j] != '\0'; j++)
+	n = va_arg(R, char *);
+	if (n == NULL)
+		n = "(null)";
+	for (j = 0; n[j] != '\0'; j++)
 	{
-		for (i = 0; input[i] != '\0'; i++)
+		for (i = 0; inp[i] != '\0'; i++)
 		{
-			if (r[j] == input[i])
+			if (n[j] == inp[i])
 			{
-				_putchar(output[i]);
+				_putchar(outp[i]);
 				count++;
 				break;
 			}
