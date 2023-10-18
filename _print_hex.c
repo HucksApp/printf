@@ -47,12 +47,12 @@ int count = 0;
 			count++;
 			hx -= hex_n * power16;
 			power16 /= 16;
-			i++
+			i++;
 		}
 	}
 	else
 	{
-		_putchar('0')
+		_putchar('0');
 		return (1);
 	}
 	return (count);

@@ -40,7 +40,7 @@ int _print_unsig(va_list u)
 
 	next_var = va_arg(u, int);
 	if (next_var < 0)
-	}
+	{
 		ui = (UINT_MAX + 1) + next_var;
 		put_uint(ui, &count);
 	}

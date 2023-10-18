@@ -72,7 +72,7 @@ int _printf(const char *str, ...)
 			else if (fmt == NULL)
 			{
 				if (str[char_count] == FMT_SYB &&
-				    str[char_count + 1] == ' ' && str[char_count + OB2] != FMT_SYB)
+				    str[char_count + 1] == ' ' && str[char_count + 2] != FMT_SYB)
 					return (char_count);
 				_putchar(str[char_count]);
 				print_count++;
