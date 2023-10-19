@@ -23,6 +23,9 @@ int _print_unsig(va_list u);
 int _print_rot13(va_list R);
 int _print_bin(va_list b);
 int _print_percentage(va_list char_c);
+int _print_dtstring(va_list val);
+int _print_hex(unsigned int hx, unsigned int selector);
+
 
 /**
   * struct prt_fmt - Structure print format
@@ -38,4 +41,3 @@ typedef struct prt_fmt
 } print_format;
 
 #endif
-
