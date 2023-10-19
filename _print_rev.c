@@ -11,17 +11,18 @@
 
 int _print_rev(va_list rv)
 {
-	int i, count = 0;
+	int i, j = 0, count = 0;
 	char *s_ptr;
 
 	s_ptr = va_arg(rv, char*);
 	if (s_ptr == NULL)
-		s_ptr = ")llun(";
+		s_ptr = "(null)";
 	i = 0;
 	while (s_ptr[i] != '\0')
-	for (i -= 1; i >= 0; i--)
+		i++;
+	for (j = i - 1; j >= 0; j--)
 	{
-		_putchar(s_ptr[i]);
+		_putchar(s_ptr[j]);
 		count++;
 
 	}

@@ -19,8 +19,8 @@ int _print_char (va_list char_c)
 
 
 /**
- * print_porcentage - %
- *
+ * _print_percentage - prints %
+ * @char_c: unused variable
  * Return: 1.
  */
 int _print_percentage(va_list char_c)

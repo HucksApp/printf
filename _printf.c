@@ -12,28 +12,45 @@ int (*find_function(const char *format))(va_list)
 {
 	unsigned int iter = 0;
 	print_format find_fn[] = {
-		{"%c", _print_char},
-		{"%s", _print_string},
-		{"%i", _print_int},
-		{"%d", _print_int},
+		{"c", _print_char},
+		{"s", _print_string},
+		{"i", _print_int},
+		{"d", _print_int},
 		{"%r", _print_rev},
-		{"%b", _print_bin},
-		{"%u", _print_unsig},
-		{"%o", _print_oct},
+		{"b", _print_bin},
+		{"u", _print_unsig},
+		{"o", _print_oct},
 		{"%%", _print_percentage},
-		{"%x", _print_hexx},
-		{"%X", _print_hexX},
-		{"%R", _print_rot13},
+		{"x", _print_hexx},
+		{"X", _print_hexX},
+		{"R", _print_rot13},
 		{NULL, NULL}
 	};
 
 	while (find_fn[iter].spc)
 	{
-		if (find_fn[iter].spc[1] == (*format))
+		if (find_fn[iter].spc[0] == (*format))
 			return (find_fn[iter].fn);
 		iter++;
 	}
 	return (NULL);
+}
+
+/**
+ * record - print record helper
+ * @a: variable member a
+ * @av: variable member a value
+ * @b: variable member b
+ * @bv: variable member b value
+ *
+*/
+
+
+void record(int *a, int av, int *b, int bv)
+{
+
+	*a += av;
+	*b += bv;
 }
 
 
@@ -66,22 +83,17 @@ start:
 		{
 			f = find_function(&(format[iter + 1]));
 			if (f != NULL)
-			{
-				len += f(ap);
-				iter += 2;
-			}
+				record(&iter, 2, &len, f(ap));
 			else if (f == NULL && format[iter + 1] == ' '
 					&& format[iter + 2] == FMT_SYB)
 			{
 				_putchar(FMT_SYB);
-				 iter += 3;
-				len += 1;
+				record(&iter, 3, &len, 1);
 			}
 			else
 			{
-				_putchar(format[iter + 1]);
-				iter += 2;
-				len += 1;
+				_putchar(format[iter]);
+				 record(&iter, 1, &len, 1);
 			}
 		}
 		if (format[iter] != '\0' && format[iter])
