@@ -25,7 +25,8 @@ int _print_bin(va_list b);
 int _print_percentage(va_list char_c);
 int _print_dtstring(va_list val);
 int _print_hex(unsigned int hx, unsigned int selector);
-
+int _print_dtstring2(va_list val);
+int _printf_hexaux(unsigned long int num);
 
 /**
   * struct prt_fmt - Structure print format

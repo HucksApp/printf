@@ -23,7 +23,7 @@ int (*find_function(const char *format))(va_list)
 		{"%%", _print_percentage},
 		{"x", _print_hexx},
 		{"X", _print_hexX},
-		{"S", _print_dtstring},
+		{"S", _print_dtstring2},
 		{"R", _print_rot13},
 		{NULL, NULL}
 	};
