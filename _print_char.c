@@ -14,3 +14,19 @@ int _print_char (va_list char_c)
 	_putchar(char_n);
 	return (1);
 }
+
+
+
+
+/**
+ * print_porcentage - %
+ *
+ * Return: 1.
+ */
+int _print_percentage(va_list char_c)
+{
+	(void)char_c;
+	_putchar('%');
+	return (1);
+}
+

@@ -1,5 +1,7 @@
 #include "main.h"
 
+
+
 /**
   * find_function - function that finds formats for _printf
   * calls the corresponding function.
@@ -8,70 +10,83 @@
   */
 int (*find_function(const char *format))(va_list)
 {
-	unsigned int i = 0;
-	prt_fmt find_f[] = {
-		{"c", _print_char},
-		{"s", _print_string},
-		{"i", _print_int},
-		{"d", _print_int},
-		{"r", _print_rev},
-		{"b", _print_bin},
-		{"u", _print_unsig},
-		{"o", _print_oct},
-		{"x", _print_hexx},
-		{"X", _print_hexX},
-		{"R", _print_rot13},
+	unsigned int iter = 0;
+	print_format find_fn[] = {
+		{"%c", _print_char},
+		{"%s", _print_string},
+		{"%i", _print_int},
+		{"%d", _print_int},
+		{"%r", _print_rev},
+		{"%b", _print_bin},
+		{"%u", _print_unsig},
+		{"%o", _print_oct},
+		{"%%", _print_percentage},
+		{"%x", _print_hexx},
+		{"%X", _print_hexX},
+		{"%R", _print_rot13},
 		{NULL, NULL}
 	};
 
-	while (find_f[i].spc)
+	while (find_fn[iter].spc)
 	{
-		if (find_f[i].spc[0] == (*format))
-			return (find_f[i].fn);
-		i++;
+		if (find_fn[iter].spc[1] == (*format))
+			return (find_fn[iter].fn);
+		iter++;
 	}
 	return (NULL);
 }
+
+
+
 /**
   * _printf - function that produces output according to a format.
   * @format: format (char, string, int, decimal)
   * Return: size the output text;
   */
-int _printf(const char *format, ...)
+
+int _printf(const char * const format, ...)
 {
 	va_list ap;
-	int (*f)(va_list);
-	unsigned int i = 0, cprint = 0;
+	int (*f)(va_list), iter = 0, len = 0;
 
-	if (format == NULL)
-		return (-1);
 	va_start(ap, format);
-	while (format[i])
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
+start:
+	while (format[iter] != '\0')
 	{
-		while (format[i] != '%' && format[i])
+		while (format[iter] != FMT_SYB && format[iter])
 		{
-			_putchar(format[i]);
-			cprint++;
-			i++;
+			_putchar(format[iter]);
+			iter++;
+			len++;
+			goto start;
 		}
-		if (format[i] == '\0')
-			return (cprint);
-		f = find_function(&format[i + 1]);
-		if (f != NULL)
+		while (format[iter] == FMT_SYB && format[iter])
 		{
-			cprint += f(ap);
-			i += 2;
-			continue;
+			f = find_function(&(format[iter + 1]));
+			if (f != NULL)
+			{
+				len += f(ap);
+				iter += 2;
+			}
+			else if (f == NULL && format[iter + 1] == ' '
+					&& format[iter + 2] == FMT_SYB)
+			{
+				_putchar(FMT_SYB);
+				 iter += 3;
+				len += 1;
+			}
+			else
+			{
+				_putchar(format[iter + 1]);
+				iter += 2;
+				len += 1;
+			}
 		}
-		if (!format[i + 1])
-			return (-1);
-		_putchar(format[i]);
-		cprint++;
-		if (format[i + 1] == '%')
-			i += 2;
-		else
-			i++;
+		if (format[iter] != '\0' && format[iter])
+			goto start;
 	}
-	va_end(ap);
-	return (cprint);
+	return (len);
 }
+
