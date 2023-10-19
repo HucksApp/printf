@@ -28,7 +28,7 @@ int count = 0;
 			count_n++;
 		}
 		power16 = 1;
-		for (i = 1, i <= count_n - 1, i++)
+		for (i = 1; i <= count_n - 1; i++)
 			power16 *= 16;
 		i = 1;
 		while (i <= count_n)
