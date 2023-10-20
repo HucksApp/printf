@@ -5,26 +5,32 @@
   * @R: string to convert
   * Return: printer counter
   */
+
 int _print_rot13(va_list R)
 {
-	char *n;
-	int j, i, count = 0;
-	char inp[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
-	char outp[] = "NOPQRSTUVWXYZABCDEFGHIJKLM nopqrstuvwxyzabcdefghijklm";
+	int iter, j, count = 0, k = 0;
+	char *s = va_arg(R, char*);
+	char alph[] = {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"};
+	char beta[] = {"nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM"};
 
-	n = va_arg(R, char *);
-	if (n == NULL)
-		n = "(null)";
-	for (j = 0; n[j] != '\0'; j++)
+	if (s == NULL)
+		s = "(null)";
+	for (iter = 0; s[iter]; iter++)
 	{
-		for (i = 0; inp[i] != '\0'; i++)
+		k = 0;
+		for (j = 0; alph[j] && !k; j++)
 		{
-			if (n[j] == inp[i])
+			if (s[iter] == alph[j])
 			{
-				_putchar(outp[i]);
+				_putchar(beta[j]);
 				count++;
-				break;
+				k = 1;
 			}
+		}
+		if (!k)
+		{
+			_putchar(s[iter]);
+			count++;
 		}
 	}
 	return (count);
