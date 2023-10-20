@@ -1,3 +1,4 @@
 *.o
 mai*.c
 a.out
+_printf2.c

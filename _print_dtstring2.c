@@ -27,7 +27,7 @@ int _print_dtstring2(va_list val)
 				_putchar('0');
 				len++;
 			}
-			len = len + _printf_hexaux(cast);
+			len = len + _print_hexaux(cast);
 		}
 		else
 		{
