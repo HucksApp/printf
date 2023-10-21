@@ -30,3 +30,18 @@ int _print_percentage(va_list char_c)
 	return (1);
 }
 
+
+
+/**
+ * is_printable - Evaluates if a char is printable
+ * @ch: Char to be evaluated
+ *
+ * Return: 1 if c is printable, 0 otherwise
+ */
+int is_printable(char ch)
+{
+	if (ch >= 32 && ch < 127)
+		return (1);
+
+	return (0);
+}
