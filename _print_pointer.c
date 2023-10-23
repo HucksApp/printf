@@ -1,33 +1,53 @@
 #include "main.h"
 
 
+
+
+
 /**
- * _print_pointer - prints pointers
- * @var_v: args value
- * Return: printer counter (int)
+ * _print_pointer - Prints the value of a pointer variable
+ * @ap: List of args
+ * @buffer: Buffer array of formated strings
+ * @flag:  passed flags
+ * @precision: precision
+ * @width: width
+ * @size: size specifier
+ * Return: printer counter
  */
-
-
-int _print_pointer(va_list var_v)
+int _print_pointer(va_list ap, char buffer[],
+				int flag, int width, int precision, int size)
 {
-	int ptrc, iter;
-	long int m;
-	void *ptr;
-	char *s = "(nil)";
+	char c = 0, padd = ' ';
+	int index = BUFFER_SIZE - 2, len = 2, padd_start = 1;
+	unsigned long num_addr;
 
+	void *addrs = va_arg(ap, void *);
+	const char MAP[] = "0123456789abcdef";
 
-	ptr = va_arg(var_v, void*);
-	if (ptr == NULL)
+	UNUSED_VAR(width);
+	UNUSED_VAR(size);
+
+	if (addrs == NULL)
+		return (write(1, "(nil)", 5));
+	buffer[BUFFER_SIZE - 1] = '\0';
+	UNUSED_VAR(precision);
+
+	num_addr = (unsigned long)addrs;
+	while (num_addr > 0)
 	{
-		for (iter = 0; s[iter] != '\0'; iter++)
-			_putchar(s[iter]);
-		return (iter);
+		buffer[index--] = MAP[num_addr % 16];
+		num_addr /= 16;
+		len++;
 	}
-	m = (unsigned int long) ptr;
-	_putchar('0');
-	_putchar('x');
-	ptrc = _print_hexaux(m);
-	ptrc += 2;
-	return (ptrc);
+	if ((flag & ZERO_FLG) && !(flag & MINUS_FLG))
+		padd = ATI_ORIGIN;
+	if (flag & PLUS_FLG)
+		c = '+', len++;
+	else if (flag & SPACE_FLG)
+		c = ' ', len++;
 
+	index++;
+	return (_write_pointer(buffer, index, len,
+			width, flag, padd, c, padd_start));
 }
+

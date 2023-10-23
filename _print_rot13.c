@@ -1,37 +1,53 @@
 #include "main.h"
 
+
 /**
-  * _print_rot13 - convert string to rot13.
-  * @R: string to convert
-  * Return: printer counter
-  */
-
-int _print_rot13(va_list R)
+* _print_rot13 - print  string in rot13.
+* @ap: List of args
+* @buffer: Buffer array of formated strings
+* @flag:  passed flags
+* @width: width
+* @precision: precision
+* @size: size specifier
+* Return: printer counter
+*/
+int _print_rot13(va_list ap, char buffer[],
+	int flag, int width, int precision, int size)
 {
-	int iter, j, count = 0, k = 0;
-	char *s = va_arg(R, char*);
-	char alph[] = {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"};
-	char beta[] = {"nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM"};
+	char x;
+	char *str;
+	unsigned int iter, j;
+	int count = 0;
+	const char INP[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	const char OUTP[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-	if (s == NULL)
-		s = "(null)";
-	for (iter = 0; s[iter]; iter++)
+	str = va_arg(ap, char *);
+	UNUSED_VAR(buffer);
+	UNUSED_VAR(size);
+	UNUSED_VAR(flag);
+	UNUSED_VAR(precision);
+	UNUSED_VAR(width);
+	if (str == NULL)
+		str = "(AHYY)";
+	for (iter = 0; str[iter]; iter++)
 	{
-		k = 0;
-		for (j = 0; alph[j] && !k; j++)
+		for (j = 0; INP[j]; j++)
 		{
-			if (s[iter] == alph[j])
+			if (INP[j] == str[iter])
 			{
-				_putchar(beta[j]);
+				x = OUTP[j];
+				_putchar(x);
 				count++;
-				k = 1;
+				break;
 			}
 		}
-		if (!k)
+		if (!INP[j])
 		{
-			_putchar(s[iter]);
+			x = str[iter];
+			_putchar(x);
 			count++;
 		}
 	}
 	return (count);
 }
+
