@@ -8,9 +8,8 @@
 * @flags: passed flags
 * @buffer:  Array of formated string
 * @width: width
-
 * @size: Size specifier
-* Return: 1 or 2;
+* Return: 1 or 2
 */
 int _print_formater(const char *fmt, int *index, va_list ap, char buffer[],
 	int flags, int width, int precision, int size)
